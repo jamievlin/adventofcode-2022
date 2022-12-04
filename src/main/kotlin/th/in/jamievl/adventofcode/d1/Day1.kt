@@ -21,4 +21,9 @@ fun main() {
     }
 
     println("max calories: ${caloriesList.max()}")
+
+    val calListSorted = caloriesList.sortedDescending()
+    val first3Sum = calListSorted.slice(IntRange(0, 2)).sum()
+
+    println("max calories of 3 : $first3Sum")
 }
