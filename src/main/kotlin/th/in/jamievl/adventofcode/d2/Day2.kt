@@ -1,5 +1,8 @@
 package th.`in`.jamievl.adventofcode.d2
 
+import th.`in`.jamievl.adventofcode.common.readFromResource
+
+
 import java.lang.IllegalArgumentException
 
 enum class WinState {
@@ -69,44 +72,39 @@ enum class RpsPlay {
 
 
 fun main() {
-    val inputFile = ClassLoader.getSystemResourceAsStream("d2/d2_input.txt")!!
     var totalScore = 0
     var secondPartScore = 0
 
-    with(inputFile.bufferedReader()) {
-        var line = this.readLine()
-        while (line != null) {
-            val yourPlay = line[2]
-            val desiredOutcomeLine = line[2] // part 2
-            val theirPlay = line[0]
+    readFromResource("d2/d2_input.txt") {
+        val yourPlay = it[2]
+        val desiredOutcomeLine = it[2] // part 2
+        val theirPlay = it[0]
 
-            val yourEnum = when (yourPlay) {
-                'X' -> RpsPlay.ROCK
-                'Y' -> RpsPlay.PAPER
-                'Z' -> RpsPlay.SCISSORS
-                else -> throw IllegalArgumentException()
-            }
-
-            val desiredOutcome = when (desiredOutcomeLine) {
-                'X' -> WinState.LOSE
-                'Y' -> WinState.DRAW
-                'Z' -> WinState.WIN
-                else -> throw IllegalArgumentException()
-            }
-
-            val theirEnum = when (theirPlay) {
-                'A' -> RpsPlay.ROCK
-                'B' -> RpsPlay.PAPER
-                'C' -> RpsPlay.SCISSORS
-                else -> throw IllegalArgumentException()
-            }
-
-            // 1st part
-            totalScore += RpsPlay.calculateScore(yourEnum, theirEnum)
-            secondPartScore += RpsPlay.calculateScoreFromDesiredOutcome(theirEnum, desiredOutcome)
-
-            line = this.readLine()
+        val yourEnum = when (yourPlay) {
+            'X' -> RpsPlay.ROCK
+            'Y' -> RpsPlay.PAPER
+            'Z' -> RpsPlay.SCISSORS
+            else -> throw IllegalArgumentException()
         }
+
+        val desiredOutcome = when (desiredOutcomeLine) {
+            'X' -> WinState.LOSE
+            'Y' -> WinState.DRAW
+            'Z' -> WinState.WIN
+            else -> throw IllegalArgumentException()
+        }
+
+        val theirEnum = when (theirPlay) {
+            'A' -> RpsPlay.ROCK
+            'B' -> RpsPlay.PAPER
+            'C' -> RpsPlay.SCISSORS
+            else -> throw IllegalArgumentException()
+        }
+
+        // 1st part
+        totalScore += RpsPlay.calculateScore(yourEnum, theirEnum)
+        secondPartScore += RpsPlay.calculateScoreFromDesiredOutcome(theirEnum, desiredOutcome)
+
     }
 
     println("total score: $totalScore")

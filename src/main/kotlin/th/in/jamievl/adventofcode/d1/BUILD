@@ -4,10 +4,11 @@ kt_jvm_library(
     name = "d1",
     srcs = glob(["*.kt"]),
     resources = ["//src/main/resources/d1:d1_input"],
+    deps = ["//src/main/kotlin/th/in/jamievl/adventofcode/common"],
 )
 
 java_binary(
     name = "d1_bin",
-    runtime_deps = ["d1"],
     main_class = "th.in.jamievl.adventofcode.d1.Day1Kt",
+    runtime_deps = ["d1"],
 )

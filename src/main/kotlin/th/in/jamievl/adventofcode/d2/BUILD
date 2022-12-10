@@ -4,6 +4,7 @@ kt_jvm_library(
     name = "d2",
     srcs = glob(["*.kt"]),
     resources = ["//src/main/resources/d2:d2_input"],
+    deps = ["//src/main/kotlin/th/in/jamievl/adventofcode/common"],
 )
 
 java_binary(
